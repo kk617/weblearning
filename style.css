@@ -62,8 +62,8 @@
   width : 0em;
   height : 0em;
   border-top :3.5em transparent solid;
-  border-right :3.5em red solid;
-  border-bottom :3.5em red solid;
+  border-right :3.5em green solid;
+  border-bottom :3.5em green solid;
   border-left :3.5em transparent solid;
   margin-bottom: 2em;
 }
