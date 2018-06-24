@@ -1,0 +1,69 @@
+/* for homework: drawtriangles */
+.foursquares{
+  width : 0em;
+  height : 0em;
+  border-top :5em blue solid;
+  border-right :5em yellow solid;
+  border-bottom :5em green solid;
+  border-left :5em red solid;
+  margin-bottom: 2em;
+}
+
+.topsquare{
+  width : 0em;
+  height : 0em;
+  border-top :5em blue solid;
+  border-right :5em transparent solid;
+  border-bottom :5em transparent solid;
+  border-left :5em transparent solid;
+  margin-bottom: 2em;
+}
+
+.leftsquare{
+  width : 0em;
+  height : 0em;
+  border-top :5em transparent solid;
+  border-right :5em transparent solid;
+  border-bottom :5em transparent solid;
+  border-left :5em red solid;
+  margin-bottom: 2em;
+}
+
+.rightsquare{
+  width : 0em;
+  height : 0em;
+  border-top :5em transparent solid;
+  border-right :5em yellow solid;
+  border-bottom :5em transparent solid;
+  border-left :5em transparent solid;
+  margin-bottom: 2em;
+}
+
+.bottomsquare{
+  width : 0em;
+  height : 0em;
+  border-top :5em transparent solid;
+  border-right :5em transparent solid;
+  border-bottom :5em green solid;
+  border-left :5em transparent solid;
+  margin-bottom: 2em;
+}
+.leftbotsquare{
+  width : 0em;
+  height : 0em;
+  border-top :3.5em transparent solid;
+  border-right :3.5em transparent solid;
+  border-bottom :3.5em red solid;
+  border-left :3.5em red solid;
+  margin-bottom: 2em;
+}
+
+.rightbotsquare{
+  width : 0em;
+  height : 0em;
+  border-top :3.5em transparent solid;
+  border-right :3.5em red solid;
+  border-bottom :3.5em red solid;
+  border-left :3.5em transparent solid;
+  margin-bottom: 2em;
+}
