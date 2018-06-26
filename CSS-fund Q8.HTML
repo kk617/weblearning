@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS fund Q8</title>
+    <style>
+                
+        .table{
+        font-family: Arial, sans-serif;
+        text-align: left;
+        font-size: 120%;
+        border-collapse: collapse;
+        margin: 0 auto;
+        width: 50%;
+        background-color: #fff;
+        }
+        .table td{
+        border-bottom: 1px solid #ddd;
+        padding: 8px 8px;
+        }
+        .table tbody tr:nth-last-child(odd) {
+        background-color: #f1f1f1;
+        }
+
+
+        #firsttable {
+        border: 1px solid #ddd;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        }
+        #firsttable>thead {
+        background-color: #4CAF50;
+        color: #fff;
+        }
+        .table thead th {
+        padding:10px 8px;
+        }
+
+    </style>
+</head>
+<body>
+    <table id="firsttable" class = "table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                    <td>Jill</td>
+                    <td>Smith</td>
+                    <td>50</td>
+            </tr>
+            <tr>
+                    <td>Eve</td>
+                    <td>Jackson</td>
+                    <td>94</td>
+            </tr>
+            <tr>
+                    <td>Adam</td>
+                    <td>Johnson</td>
+                    <td>67</td>
+            </tr>
+            <tr>
+                    <td>Bo</td>
+                    <td>Nilsson</td>
+                    <td>50</td>
+            </tr>
+            <tr>
+                    <td>Mike</td>
+                    <td>Ross</td>
+                    <td>35</td>            
+          </tr>
+        </tbody>
+    </table>
+    <table id="secondtable" class = "table">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                        <td>Jill</td>
+                        <td>Smith</td>
+                        <td>50</td>
+                </tr>
+                <tr>
+                        <td>Eve</td>
+                        <td>Jackson</td>
+                        <td>94</td>
+                </tr>
+                <tr>
+                        <td>Adam</td>
+                        <td>Johnson</td>
+                        <td>67</td>
+                </tr>
+                <tr>
+                        <td>Bo</td>
+                        <td>Nilsson</td>
+                        <td>50</td>
+                </tr>
+                <tr>
+                        <td>Mike</td>
+                        <td>Ross</td>
+                        <td>35</td>            </tr>
+            </tbody>
+        </table>
+</body>
+</html>
