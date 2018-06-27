@@ -4,10 +4,16 @@
   <meta charset="utf-8">
   <title>JS Bin</title>
   <style>
-  body{
-  padding:0px;
-  margin:0px;
-}
+    .body{
+      margin: 8px;
+    }
+  .layout{
+      width : 600px;
+      margin: 0 auto;
+    }
+    .layout>div{
+      margin:30px
+    }
 .button{
   display:inline-block;
   border-radius: 3px;
@@ -45,6 +51,7 @@
   </style>
 </head>
 <body>
+  <div class="layout">
   <ul>
     <li class= "button steal"><a href="#">steal</a></li>
     <li class= "button yellow"><a href="#">yellow</a></li>
@@ -52,5 +59,6 @@
     <li class= "button red"><a href="#">red</a></li>
     <li class= "button green"><a href="#">green</a></li>
   </ul>
+  </div>
 </body>
 </html>
