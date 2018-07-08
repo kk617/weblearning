@@ -1,0 +1,28 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    color: #fff; 
+    display: block;
+}
+
+a:hover{
+    color: #fec503;
+}
+
+li{
+    list-style-type: none;
+}
+
+.clearfix::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+body{
+    font: 14px;
+}
