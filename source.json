@@ -1,0 +1,21 @@
+[{
+    "src": "./source/ByeByeBeautiful/ByeByeBeautiful.mp3",
+    "title": "Bye Bye Beautiful",
+    "author": "Nightwish",
+    "img": "./source/ByeByeBeautiful/220px-ByeByeBeauty.JPG"
+},{
+    "src": "./source/GhostLoveScore/Nightwish - Ghost Love Score.mp3",
+    "title": "Ghost Love Score",
+    "author": "Nightwish",
+    "img": "./source/GhostLoveScore/GhostLoveScore.jpg"
+},{
+    "src": "./source/Hello/Adele - Hello.mp3",
+    "title": "Hello",
+    "author": "Adele",
+    "img": "./source/GhostLoveScore/GhostLoveScore.jpg"
+},{
+    "src": "./source/Nemo/Nightwish - Nemo.mp3",
+    "title": "Hello",
+    "author": "Adele",
+    "img": "./source/Nemo/Nemo.jpg"
+}]
