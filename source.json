@@ -1,21 +1,21 @@
 [{
-    "src": "./source/ByeByeBeautiful/ByeByeBeautiful.mp3",
+    "src": "http://pcvfh96wx.bkt.clouddn.com/ByeByeBeautiful.mp3",
     "title": "Bye Bye Beautiful",
     "author": "Nightwish",
-    "img": "./source/ByeByeBeautiful/220px-ByeByeBeauty.JPG"
+    "img": "http://pcvfh96wx.bkt.clouddn.com/220px-ByeByeBeauty.JPG"
 },{
-    "src": "./source/GhostLoveScore/Nightwish - Ghost Love Score.mp3",
+    "src": "http://pcvfh96wx.bkt.clouddn.com/Nightwish%20-%20Ghost%20Love%20Score.mp3",
     "title": "Ghost Love Score",
     "author": "Nightwish",
-    "img": "./source/GhostLoveScore/GhostLoveScore.jpg"
+    "img": "http://pcvfh96wx.bkt.clouddn.com/GhostLoveScore.jpg"
 },{
-    "src": "./source/Hello/Adele - Hello.mp3",
+    "src": "http://pcvfh96wx.bkt.clouddn.com/Adele%20-%20Hello.mp3",
     "title": "Hello",
     "author": "Adele",
-    "img": "./source/GhostLoveScore/GhostLoveScore.jpg"
+    "img": "http://pcvfh96wx.bkt.clouddn.com/Adelehlellocdcover.jpg"
 },{
-    "src": "./source/Nemo/Nightwish - Nemo.mp3",
+    "src": "http://pcvfh96wx.bkt.clouddn.com/Nightwish%20-%20Nemo.mp3",
     "title": "Hello",
     "author": "Adele",
-    "img": "./source/Nemo/Nemo.jpg"
+    "img": "http://pcvfh96wx.bkt.clouddn.com/Nemo.jpg"
 }]
