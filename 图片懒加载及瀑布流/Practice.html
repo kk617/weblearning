@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <style>
+	html,body,ul,li,p,div{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	ul,li{
+		list-style: none;
+	}
+
+  .wrap{
+  	width: 900px;
+		margin: 0 auto;
+  }
+
+	.clearfix:after{
+		content: '';
+		display: block;
+		clear: both;
+	}
+	#pic-ct{
+		position: relative;
+	}
+	#pic-ct .item{
+		position: absolute;
+		padding: 0 0 10px 0;
+		width: 280px;
+		margin: 10px;
+		border: 1px solid #DFDFDF;
+		background: #FFF;
+		opacity: 0;
+		transition: all .8s;
+	}
+	#pic-ct .item img{
+	    margin: 10px;
+	    width: 260px;
+	}
+	#pic-ct .item .header{
+		height: 25px;
+	    margin: 0 12px;
+	    border-bottom: 1px solid #DBDBDB;
+	}
+	#pic-ct .desp{
+		font-size: 12px;
+		line-height: 1.8;
+	  margin: 10px 15px 0;
+	  color: #777371;
+	}
+	#load{
+		visibility: hidden;
+		height: 20px;
+	}
+	.hide{
+		display: none;
+	}
+    </style>
+</head>
+<body>
+     <div class="ct-waterfall">
+        <ul id='pic-ct' class="ct clearfix">
+
+            <li class="item hide"></li>
+        </ul>
+        <div id="load">invisible</div>
+    <!-- 出现时代表需要加载新东西 -->
+     </div>
+     <script>
+            /*1.获取page=1;十条数据ajax
+            2. 把十条数据拼装成DOM放到页面，
+            3. 使用瀑布流去摆放DOM的位置
+            4. page++
+            5. 当页面滚动/条件
+            6. 重复1-4
+            */
+         
+           /*
+           var ExposeTarget = (function(){//封装
+              start() //初始话读取 
+              function bind($target,handler){//定义bind 
+                  $(window).on('scroll',function(){
+                      var timer;
+                      //函数节流
+                      return function(){
+                          if(timer){
+                              console.log(timer)
+                              clearTimeout(timer);
+                          }
+                      timer=setTimeout(start,300);
+                      }
+                  }())//此处()作用 - 立即调用return后面函数，形成闭包
+      
+              function start(){
+                  console.log('iam in start')
+                  if(isShow($target)){
+                      handler();
+                }        
+              }
+      
+              function isShow($node){
+                  //核心逻辑，判断高度的关系
+                  return ($node.offset().top < $(window).height() + $(window).scrollTop())
+                  //需要清除浮动才可以计算offset:Get the current coordinates of the first element, or set the coordinates of every element, in the set of matched elements, relative to the document.
+                   }
+          }  
+              
+               return{
+                   bind: bind
+               }
+           })();
+           */
+           var curPage = 1;
+           var perPageCount = 20;
+           var colHeightArray = [];
+           $target = $('#load')
+           var nodeWidth = $('.item').outerWidth(true);
+           console.log($(".item"))
+           console.log(nodeWidth)
+           var colNum = Math.floor($('#pic-ct').width()/nodeWidth);
+           console.log(colNum)
+          for(var i = 0;i<colNum; i++){
+              colHeightArray.push(0);
+              }
+                  
+           //ExposeTarget($target,dosth);
+           start()
+            $(window).on('scroll',function(){
+                      var timer;
+                      //函数节流
+                        return function(){
+                          if (timer){
+                              clearTimeout(timer)   
+                          }
+                          timer = setTimeout(function(){//setTimeout 第一个参数必须为函数名，通过这个方法来构造
+                             console.log('i am in settimeout') 
+                             if(isShow($target)){
+                                start();    
+                             }
+                        },300)
+                    }
+                }())
+      
+              function isShow($node){
+                  //核心逻辑，判断高度的关系
+                  return ($node.offset().top < $(window).height() + $(window).scrollTop())
+                  //需要清除浮动才可以计算offset:Get the current coordinates of the first element, or set the coordinates of every element, in the set of matched elements, relative to the document.
+              }
+      
+              function getData(callback){
+                  console.log('i am in getdata')
+                  $.ajax({
+                      url: "http://platform.sina.com.cn/slide/album_tech",
+                      dataType: 'jsonp',
+                      jsonp: 'jsoncallback',
+                      data:{
+                        app_key: '1271687855',
+                        num: perPageCount,
+                        page: curPage
+                      },
+                      success: function(ret){
+                          if(ret.status.code == 0){
+                              console.log('ret is',ret);
+                              callback(ret.data)
+                              curPage++;
+                          }else{
+                              console.log('ajax erro')
+                          }
+                      }
+                  })
+              }
+              function start(){
+                  getData(function(nodes){
+                      console.log(nodes)
+                      $.each(nodes, function(index, node){//
+                          var $node = getNode(node)
+                          $node.find('img').on('load',function(){
+                              $('#pic-ct').append($node);
+                              waterfallrender($node)
+                          })
+                      })
+                  })
+              }
+      
+             
+              function getNode(item){
+                  var template = ''
+                      template += '<li class="item">';
+                      template += '<a href="'+ item.url +'" class="link"> <img src="' + item.img_url + '"alt=""></a>';
+                      template += '<h4 class="header">' + item.short_name + '</h4>';
+                      template += '<p class="desp">' + item.short_intro + '</p>';
+                      template += '</li>'
+                  return $(template);
+              }
+          
+              function waterfallrender($node){
+                      var minindex = 0;
+                      var miniValue = colHeightArray[0];
+                      //找到最小值
+                     for(var i =0;i<colHeightArray.length;i++){
+                         if(colHeightArray[i] < miniValue){
+                             console.log(colHeightArray[i])
+                             minindex = i;
+                             miniValue = colHeightArray[i]
+                         }
+                     }
+                      $node.css({
+                          left: minindex * nodeWidth,//找到最小点，因为imgwidth是定宽，所以乘法确定横向位置
+                          top: miniValue,//最小点处的高度
+                          opacity:1
+                     })
+                     colHeightArray[minindex] += $node.outerHeight(true);
+                     $('#pic-ct').height(Math.max.apply(null,colHeightArray));
+                  }
+          
+          
+      
+             
+              
+              
+          </script>
+</body>
+
+</html>

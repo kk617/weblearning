@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sinanews-lazyload-waterfall</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <style>
+	html,body,ul,li,p,div{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	ul,li{
+		list-style: none;
+	}
+
+  .wrap{
+  	width: 900px;
+		margin: 0 auto;
+  }
+
+	.clearfix:after{
+		content: '';
+		display: block;
+		clear: both;
+	}
+	#pic-ct{
+        min-width: 700px;
+		position: relative;
+	}
+	#pic-ct .item{
+		position: absolute;
+		padding: 0 0 10px 0;
+		width: 280px;
+		margin: 10px;
+		border: 1px solid #DFDFDF;
+		background: #FFF;
+		opacity: 0;
+		transition: all .8s;
+	}
+	#pic-ct .item img{
+	    margin: 10px;
+	    width: 260px;
+	}
+	#pic-ct .item .header{
+		height: 25px;
+	    margin: 0 12px;
+	    border-bottom: 1px solid #DBDBDB;
+	}
+	#pic-ct .desp{
+		font-size: 12px;
+		line-height: 1.8;
+	  margin: 10px 15px 0;
+	  color: #777371;
+	}
+	#load{
+		visibility: hidden;
+		height: 20px;
+	}
+	.hide{
+		display: none;
+	}
+    </style>
+</head>
+<body>
+     <div class="ct-waterfall">
+        <ul id='pic-ct' class="ct clearfix">
+
+            <li class="item hide"></li>
+        </ul>
+        <div id="load">invisible</div>
+    <!-- 出现时代表需要加载新东西 -->
+     </div>
+     <script>
+            /*1.获取page=1;十条数据ajax
+            2. 把十条数据拼装成DOM放到页面，
+            3. 使用瀑布流去摆放DOM的位置
+            4. page++
+            5. 当页面滚动/条件
+            6. 重复1-4
+            */
+           var lazyload = {
+               init: function(){
+                   this.curPage = 1;
+                   this.perPageCount = 20;
+                   this.colHeightArray = [];
+                   this.$target = $('#load')
+                   this.nodeWidth = $('.item').outerWidth(true);
+                   this.colNum = Math.floor($('#pic-ct').width()/this.nodeWidth)
+                   for(var i = 0; i<this.colNum; i++){
+                       this.colHeightArray.push(0)
+                   }
+                   this.start()
+                   this.bind()
+               },
+
+               getData: function(callback){
+                   var _this = this;
+                   $.ajax({
+                    url: "http://platform.sina.com.cn/slide/album_tech",
+                    dataType: 'jsonp',
+                    jsonp: 'jsoncallback',
+                    data:{
+                       app_key: '1271687855',
+                       num: _this.perPageCount,
+                       page: _this.curPage
+                      }
+                    }).done(function(ret){
+                          if(ret.status.code == 0){
+                              console.log('ret is',ret);
+                              callback(ret.data)
+                              _this.curPage++;
+                          }else{
+                              console.log('ajax erro')
+                          }
+                      });
+                    },
+                
+                bind: function(){
+                    _this = this;
+                    var throttleFun = (function(){
+                    var timer;
+                    return function(){
+                        if(timer){
+                            console.log(timer)
+                            clearTimeout(timer);
+                        }
+                        timer=setTimeout(function(){
+                        console.log('iaminhanlder')
+                        _this.start()},300);
+                    }
+                })();//立即执行 形成闭包, 函数节流
+
+                    $(window).on('scroll',throttleFun)
+                    $(window).on('resize',function(){
+                        console.log('iam in resize')
+                        _this.reset();
+                        $('.item').each(function(){
+                            _this.waterfallrender($(this))
+                        })
+                    })
+                }, 
+
+                start: function(){
+                    var _this = this
+                    _this.getData(function(nodes){
+                        _this.render(nodes);
+                    })
+                },
+                
+                render: function(nodes){
+                    var _this = this
+                    console.log('in render',nodes)
+                    $.each(nodes,function(index,node){
+                        console.log('inrendereach',index,node)
+                        var $node = _this.getNode(node)
+                        $node.find('img').on('load',function(){
+                            $('#pic-ct').append($node);
+                            _this.waterfallrender($node);
+                        })
+                    })
+                },
+
+                getNode: function(item){
+                  var template = ''
+                      template += '<li class="item">';
+                      template += '<a href="'+ item.url +'" class="link"> <img src="' + item.img_url + '"alt=""></a>';
+                      template += '<h4 class="header">' + item.short_name + '</h4>';
+                      template += '<p class="desp">' + item.short_intro + '</p>';
+                      template += '</li>'
+                  return $(template); 
+                },
+                reset: function(){//为resize 服务
+                    var _this = this
+                    _this.colNum =Math.floor($('#pic-ct').width()/_this.nodeWidth)
+                    for(var i=0; i<_this.colNum; i++){
+                    _this.colHeightArray[i] = 0
+                }
+
+                },
+                waterfallrender: function($node){
+                    var _this = this;
+                    var minindex = 0;
+                    var miniValue = _this.colHeightArray[0]
+                    miniValue = _this.colHeightArray.reduce(function(v1,v2){//需要注意函数的作用域，否则colHeightArray为undefined，inArray方法返回-1
+                    if(v1>v2){
+                        minindex = $.inArray(v2,_this.colHeightArray);//jQuery的inArray()方法
+                        return v2;
+                    }else{
+                        minindex = $.inArray(v1,_this.colHeightArray);
+                        return v1; 
+                    }
+                    console.log(minvalue,minindex);
+                     })
+                    $node.css({
+                        left: minindex * _this.nodeWidth,
+                        top: miniValue,
+                        opacity: 1
+                    })
+                    _this.colHeightArray[minindex] += $node.outerHeight(true)
+                    $('#pic-ct').height(Math.max.apply(null,_this.colHeightArray));
+                }
+           }
+           lazyload.init()
+          </script>
+</body>
+
+</html>

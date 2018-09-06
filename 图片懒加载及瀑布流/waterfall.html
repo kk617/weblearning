@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <style>
+        .waterfall{
+            position: relative;
+            min-width: 600px;
+            margin: 0 auto;
+        }
+        .waterfall img{
+            /* 定宽 */
+            width: 100px; 
+            margin: 10px;
+            position: absolute;
+            transition: all 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <div class="waterfall">
+        <img src="http://via.placeholder.com/100x100" alt="300*100">
+        <img src="http://via.placeholder.com/100x70" alt="300*70">
+        <img src="http://via.placeholder.com/100x150" alt="300*150">
+        <img src="http://via.placeholder.com/100x250" alt="300*250">
+        <img src="http://via.placeholder.com/100x80" alt="300*80">
+        <img src="http://via.placeholder.com/100x90" alt="300*90">
+        <img src="http://via.placeholder.com/100x120" alt="300*120">
+        <img src="http://via.placeholder.com/100x210" alt="300*210">
+        <img src="http://via.placeholder.com/100x230" alt="300*230">
+        <img src="http://via.placeholder.com/100x100" alt="300*100">
+        <img src="http://via.placeholder.com/100x70" alt="300*70">
+        <img src="http://via.placeholder.com/100x150" alt="300*150">
+        <img src="http://via.placeholder.com/100x250" alt="300*250">
+        <img src="http://via.placeholder.com/100x80" alt="300*80">
+        <img src="http://via.placeholder.com/100x90" alt="300*90">
+        <img src="http://via.placeholder.com/100x120" alt="300*120">
+        <img src="http://via.placeholder.com/100x210" alt="300*210">
+        <img src="http://via.placeholder.com/100x230" alt="300*230">
+        <img src="http://via.placeholder.com/100x190" alt="300*230">
+    </div>
+    <script>
+       var waterfall = {
+           init: function(){
+                this.colNum
+                this.colHeightArray = [];
+                this.imgwidth = $('.waterfall img').outerWidth(true)//outwidth包括元素的外边距，全部宽度
+                console.log(this.imgwidth)
+                this.colNum =Math.floor($('.waterfall').width()/this.imgwidth)
+                //初始化数组
+                for(var i=0; i<this.colNum; i++){
+                    this.colHeightArray[i] = 0
+                }
+                this.bind()
+           },
+           
+           reset: function(){
+                var _this = this
+                _this.colNum =Math.floor($('.waterfall').width()/_this.imgwidth)
+                    for(var i=0; i<_this.colNum; i++){
+                    _this.colHeightArray[i] = 0
+                }
+           },
+
+           bind: function(){
+                var _this = this//否则调用不了render()
+                $('.waterfall img').on('load',function(){
+                    _this.render($(this))
+                })
+                $(window).on('resize',function(){
+                    console.log('iam in resize')
+                    _this.reset()//需要reset数组和列数
+                    $('.waterfall img').each(function(){
+                    _this.render($(this))
+                    })
+                })
+           },
+           
+           render: function($node){
+                var _this = this;
+                var minvalue = _this.colHeightArray[0];//每次都需要初始化
+                var minindex = 0;
+                //找到最小值
+                minvalue = _this.colHeightArray.reduce(function(v1,v2){//需要注意函数的作用域，否则colHeightArray为undefined，inArray方法返回-1
+                    if(v1>v2){
+                        minindex = $.inArray(v2,_this.colHeightArray);//jQuery的inArray()方法
+                        return v2;
+                    }else{
+                        minindex = $.inArray(v1,_this.colHeightArray);
+                        return v1; 
+                    }
+                    console.log(minvalue,minindex);
+              })
+                $node.css({
+                    left: minindex * _this.imgwidth,//找到最小点，因为imgwidth是定宽，所以乘法确定横向位置
+                    top: minvalue//最小点处的高度
+               })
+                 _this.colHeightArray[minindex] += $node.outerHeight(true);//原本最小的地方被填充，因此需要加上新高度来更新此处的高度
+            }
+       }
+    waterfall.init()
+    </script>
+</body>
+</html>
+<!-- waterwall的核心算法
+1.绝对定位+left+top
+2.挑上一层最短的元素放入当前行第一个元素 
+colHeightArray = [4,2,3,1,6,7,8]
+  var minvalue;
+        var minindex
+minvalue = colHeightArray.reduce(function(v1,v2,currentindex){
+    if(v1>v2){
+                    minindex = currentindex;
+                    return v2;
+                }else{
+                    minidex = currentindex
+                    return v1;
+                }
+            })
+    console.log(minvalue,minindex)
+     colHeightArray       
+-->
