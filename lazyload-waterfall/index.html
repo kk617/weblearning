@@ -129,7 +129,10 @@
                         }
                         timer=setTimeout(function(){
                         console.log('iaminhanlder')
-                        _this.start()},300);
+			             if(_this.isBottom(_this.$target)){
+                           _this.start()
+                         }
+                        },300);
                     }
                 })();//立即执行 形成闭包, 函数节流
 
@@ -142,6 +145,9 @@
                         })
                     })
                 }, 
+                isBottom: function($el){
+                  return $(window).scrollTop()+$(window).height()>$el.offset().top
+                },
 
                 start: function(){
                     var _this = this
