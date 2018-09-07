@@ -1,0 +1,102 @@
+header{
+    position: absolute;
+    padding: 20px;
+    width: 100%;
+}
+header .login{
+    float: right;
+    margin-right: 20px;
+}
+header .fas{
+    display: inline-block;
+    font-size: 2em;
+    color: #fff;
+}
+main{
+    background:linear-gradient(to right top, rgba(38,50,105,0.5), rgba(38,50,105,0.5)), url(./image/Neuschwanstein.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.pannel{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 3px 4px 5px rgba(0,0,0,0.2);
+}
+.pannel .tabs{
+    text-align: center;
+}
+.pannel .close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.pannel .tabs a{
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 10px;
+    color: #666;
+}
+.pannel .tabs a.active{
+    border-bottom: 2px solid #444;
+    color: #444;
+}
+.pannel .msg{
+    padding: 20px 40px;
+}
+.pannel .erromsg{
+    color: #ff9800;
+    font-size: 12px;
+}
+.pannel .msg input[type= text],
+.pannel .msg input[type= password]{
+    width: 100%;
+    padding: 10px 10px 10px 28px;
+    outline: none;
+}
+.pannel .msg .input-field{
+    position: relative;
+    margin-top: 10px;
+}
+.pannel .msg .fas{
+    position: absolute;
+    left: 13px;
+    top: 13px;
+    font-size: 13px;
+}
+.pannel .msg .showpasswordicon,
+.pannel .msg .showpasswordiconagn{
+    position: absolute;
+    left: calc(100% - 26px);
+    top: 13px;
+    font-size: 13px;
+}
+.pannel .msg input[type= submit]{
+    padding: 6px 10px;
+    border: none;
+    background: #fff;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.4);
+}
+.flip-pannel.login .pannel-login,
+.flip-pannel.register .pannel-register{
+    transform: translate(-50%,-50%) rotateY(0deg);
+    backface-visibility: hidden;
+     transition: all 1s;
+}
+.flip-pannel.login .pannel-register,
+.flip-pannel.register .pannel-login{
+    transform: translate(-50%,-50%) rotateY(180deg);
+    backface-visibility: hidden;
+     transition: all 1s;
+}
+.flip-pannel{
+    display: none;
+}
+.show{
+    display: block;
+}

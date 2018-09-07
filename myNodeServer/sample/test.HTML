@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>what the time now</title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .timer{
+            background: linear-gradient(to right top, rgba(38,50,105,0.78), rgba(255,152,0,0.45)), center no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 40px;
+            box-sizing: border-box;
+            color:white;
+            width: 400px;
+            height: 160px;
+            box-shadow: 0 3px 4px 5px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+      <p class="timer"></p>  
+    
+    <script>
+       window.onload = setInterval(function(){
+            var time = new Date();
+            var timer = document.getElementsByClassName("timer");
+            var b = time.toLocaleTimeString();
+            for (var i = 0; i<timer.length;i++){
+                timer[i].innerHTML = b;
+            }
+        },1000);
+    </script>
+</body>
+</html>

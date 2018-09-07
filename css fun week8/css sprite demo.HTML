@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>css sprite demo</title>
+  <style>
+      .menu{
+      list-style-type: none; 
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+    ul.menu li {
+        margin: 10px;
+        padding: 5px;
+        font-size: 16px;
+        font-family: "Trebuchet MS", Arial, sans-serif;
+        display: inline-block;
+    }
+
+    ul.menu li a{
+      display: inline-block;
+      height :50px;
+      line-height: 50px;
+      padding-left: 70px;
+      color: #3E789F;
+      background: url("https://www.tutorialrepublic.com/lib/images/mySprite.png") no-repeat;
+    }
+
+    ul.menu li.firefox a{
+          background-position: 0px 0px;
+    }
+    ul.menu li.chrome a{
+          background-position: 0px -100px;
+    }
+    ul.menu li.ie a{
+          background-position: 0px -200px;
+    }
+    ul.menu li.opera a{
+          background-position: 0px -400px;
+    }
+    ul.menu li.safari a{
+          background-position: 0px -300px;
+    }
+
+    ul.menu li.firefox a:hover{
+          background-position: 0px -50px;
+          text-decoration: underline;
+          color: red;
+    }
+    ul.menu li.chrome a:hover{
+          background-position: 0px -150px;
+          text-decoration: underline;
+          color: red;
+    }
+    ul.menu li.ie a:hover{
+          background-position: 0px -250px;
+          text-decoration: underline;
+          color: red;
+    }
+    ul.menu li.opera a:hover{
+          background-position: 0px -450px;
+          text-decoration: underline;
+          color: red;
+    }
+    ul.menu li.safari a:hover{
+          background-position: 0px -350px;
+          text-decoration: underline;
+          color: red;
+    }
+  </style>
+</head>
+<body>
+<ul class="menu">
+    <li class="firefox"><a href="#">Firefox</a></li>
+    <li class="chrome"><a href="#">Chrome</a></li>
+    <li class="ie"><a href="#">internet Explorer</a></li>
+    <li class="opera"><a href="#">Opera</a></li>
+    <li class="safari"><a href="#">Safari</a></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      .layout{
+        width:600px;
+        margin: 0px auto;
+      }
+      .layout>ul{
+        /*ul 本身有padding 和 margin 需要reset下 不然会将li给挤小*/
+        margin :0px;
+        padding: 0px;
+        color:white;
+        list-style-type: none; 
+      }
+      .layout>ul>li{
+       /*子元素要用absolute 父元素最好用个relative*/
+       position:relative;
+       display: block;
+       padding: 1px 16px;
+       line-height: 1.5;
+       margin: 30px 0px;
+       border-radius: 3px;
+      }
+      .layout>ul>li h3{
+        font-size: 24px;
+        font-weight: bold;
+        margin: 10px 0;
+      }
+      .layout a{
+        float:right;
+        color: #fff ;
+        text-decoration: none;
+        font-size:24px;
+        font-weight: bold;
+      }
+      
+      .layout .first{
+        background-color: #4CAF50;
+      }
+      
+      .layout .second{
+        background-color: #2196F3;
+      }
+      .layout .third{
+        background-color: #f44336;
+      }
+      .layout .fourth{
+        background-color: #ff9800;
+      }
+      
+      
+    </style>
+</head>
+<body>
+    <div class="layout">
+      <ul>
+        <li class="box first">
+           <a href="#">×</a>
+          <h3>恭喜你</h3>
+          <p>获得本周学霸，继续加油吧</p>
+        </li>
+        <li class="box second">
+          <a href="#">×</a>
+          <h3>通知</h3>
+          <p>晚上上课，不要忘了</p>
+        </li>
+        <li class="box third">
+          <a href="#">×</a>
+          <h3>天啊</h3>
+          <p>竟然几天没做任务</p>
+        </li>
+        <li class="box fourth">
+          <a href="#">×</a>
+          <h3>警告</h3>
+          <p>学如逆水行舟，不进则退</p>
+          <a href="#">x</a>
+        </li>
+      </ul>
+      
+      
+      
+      
+      
+    </div>
+</body>
+</html>

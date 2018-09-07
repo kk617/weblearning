@@ -1,0 +1,114 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  
+  .layout>.navbar span{
+    display: block;
+  }
+  .layout{
+    position: relative; 
+  }
+  footer{
+    position: absolute;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+    align-items: baseline; 
+  }
+  .layout>.navbar .fas{
+    font-size: 24px;
+  }
+  .layout>.navbar .bar{
+    padding-top: 5px;
+    flex: 1;
+    text-align: center;
+  
+  }
+  
+  .layout>.navbar .active{
+    color: red;
+  }
+  .layout .main{
+    background-color: rgba(132,44,223,0.4);
+    height: calc(100vh - 50px)
+  }
+  .main section{
+     height: calc(100vh - 50px);
+     padding: 10px;
+     background: #fff;
+     overflow: scroll;
+     -webkit-overflow-scrolling: touch;
+    display: none;
+  }
+  section.active{
+    display: block;
+  }
+  a{
+    text-decoration: none;
+    color: #666;
+  }
+  .container .item{
+    width: 100%;
+  }
+  .container .item a{
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+  }
+  .container .item img{
+    width: 120px;
+  }
+  .container .item .detail{
+    flex: 1;
+    padding-left: 15px
+  }
+  .container .item .detail .score{
+    color: orange;
+  }
+  #searchmovies .searcharea{
+    position: relative;
+    padding: 10px;
+    border-bottom: 1px #ccc solid;
+    margin-bottom: 10px;
+  
+  }
+  #searchmovies>.container .search{
+    width: 100%;
+    height: 32px;
+  }
+  #searchmovies>.container .fas{
+    position: absolute;
+    color: #ccc;
+    right: 20px;
+    top: 18px;
+    cursor: pointer;
+  }
+  #searchmovies>.container .fas:hover{
+    color: orange;
+  }
+  @keyframes rotate{
+    from{
+      transform: rotate(360deg);
+    }
+  }
+  .fa-spinner{
+    padding: 15px;
+    display: block;
+    text-align: center;
+    animation: rotate linear infinite;
+    color: #ccc;
+    font-size: 20px;
+    animation-duration: 2s
+  }
+  .bottom{
+    text-align: center;
+    font-size: 24px;
+    color: #ccc;
+  }

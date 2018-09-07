@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>A Snapchat</title>
+    <style>
+        body{
+        font-family: "Arail";
+        color: #333;
+        background-color: #ccc;
+        margin: 1em 10%;
+        }
+
+        h1{
+        color: #333;
+        background-color: transparent;
+        }
+
+        a{
+        color: #c60;
+        background-color: transparent;
+        font-weight:bold;
+        text-decoration: none;
+        }
+
+        ul{
+        padding: 0px;
+        }
+
+        li{
+        display: inline-block;
+        }
+
+        #pictureGallery{
+        list-style: none;
+        }
+
+        #pictureGallery li{
+        display: inline;
+        margin: 0 10px;
+        }
+
+        #pictureGallery li a img{
+        border:0;
+        }
+
+        #placeholder{
+        width: 200px;
+        height: 100px;
+        padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>实现一个页面预览的snapchat</h1>
+    <ul id="pictureGallery"> <!-- 唯一和JS有关的anchor -->
+      <li>
+        <a href="http://cdn.dota2.com/apps/dota2/images/heroes/sven_full.png?v=4627129?v=4627129" title="heroSeven">
+             <img src="http://cdn.dota2.com/apps/dota2/images/heroes/sven_hphover.png?v=4627129" alt="heroSeventhumnail.png">
+        </a>
+      </li>
+      <li>
+            <a href="http://cdn.dota2.com/apps/dota2/images/heroes/skeleton_king_full.png?v=4627129?v=4627129" title="heroSoulking">
+                 <img src="http://cdn.dota2.com/apps/dota2/images/heroes/skeleton_king_hphover.png?v=4627129">
+            </a>
+      </li>
+      <li>
+            <a href="http://cdn.dota2.com/apps/dota2/images/heroes/medusa_full.png?v=4627129?v=4627129" title="heromedusa">
+                 <img src="http://cdn.dota2.com/apps/dota2/images/heroes/medusa_hphover.png?v=4627129" alt="medusa.png">
+            </a>
+      </li>
+      <li>
+            <a href="http://cdn.dota2.com/apps/dota2/images/heroes/chaos_knight_full.png?v=4627129?v=4627129" title="heroChaosknight">
+                 <img src="http://cdn.dota2.com/apps/dota2/images/heroes/chaos_knight_hphover.png?v=4627129">
+            </a>
+      </li>
+
+    </ul>
+    <script src="./showPic.js"></script>
+</body>
+</html>
