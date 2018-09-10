@@ -74,9 +74,19 @@ main .aside > figure{
     height: 46vh;
     background-image: url('./src/Neuschwanstein.jpg');
     background-size: cover;
-    position-position: center center;
+    border-radius: 50%;
+    border: #fff 0.5px solid;
+    animation: rotate infinite linear;
+    animation-duration: 30s;
+    box-shadow:  1px 1px 3px #ccc;
 }
 
+
+@keyframes rotate{
+    from{
+        transform: rotate(-360deg)
+    }
+}
 main .aside .actions{
     display: flex;
     margin-top: 4vh;
@@ -104,6 +114,7 @@ main .detail .tag{
     font-size: 2vh;
     padding: .4em .8em;
     background: #2e6eec;
+    border-radius: 0.3em;
 }
 
 main .detail h1{
@@ -176,12 +187,19 @@ footer{
 
 footer .box ul li .cover{
     height: 16vh;
-    background-image: url('./src/Neuschwanstein.jpg');
     background-size: cover;
-    background-position: center center;
+    background-position: center center; 
 }
  footer .box{
-     position: relative;
+    position: relative;
+    overflow: hidden;
+    height: 24vh;
+    /* 绝对定位要撑开 */
+ }
+ footer ul{
+    position: absolute;
+    left: 0; 
+    z-index: 2;;
  }
 
 footer ul::after{
@@ -193,7 +211,7 @@ footer ul::after{
 footer li{
     float: left;
     margin-top: 1vh;
-    margin: 2vh 4vh 0 4vh;
+    margin: 2vh 2vh 0 2vh;
     width: 20vh;
     height: 20vh;
     text-align: center;
@@ -208,6 +226,10 @@ footer h3{
     font-size: 2vh;
     color: rgba(255,255,255,0.6);
     margin-top: 1vh;
+}
+
+footer .layout{
+    position: relative;
 }
 
 footer .fas{
