@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>原生JS实现TAB切换</title>
+  <style>
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+.pannels{
+  width: 600px;
+}
+.clearfix::after {
+  content: " ";
+  clear: both;
+  display: block;
+  overflow: hidden;
+  }
+
+.pannels .tab{
+  float: left;
+  padding: 10px;
+  background-color: #ddd;
+  border-left: 0.5px solid #ccc;
+  border-top: 0.5px solid #ccc;
+}
+.pannels .tab:last-child{
+    border-right: 0.5px solid #ccc;
+}
+.layout .pannels .tab.active{
+  background-color: white;
+}
+.displayarea{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:300px;
+  height: 300px;
+  border: 0.5px solid black;
+  background-color: white;
+}
+.displayarea .content{
+  display: none;
+}
+.displayarea .content.active{
+  display: block;
+}
+  </style>
+</head>
+<body>
+  <div class="layout">
+  <div class="pannels clearfix">
+    <div class="tab">tab1</div>
+    <div class="tab">tab2</div>
+    <div class="tab">tab3</div>
+    <div class="tab">tab4</div>
+  </div>
+  <div class="displayarea">
+    <div class="content">picture1</div>
+    <div class="content">picture2</div>
+    <div class="content">picture3</div>
+    <div class="content">picture4</div>
+  </div>
+  </div>
+  <script src="./tab.js"></script>
+
+</body>
+</html>
