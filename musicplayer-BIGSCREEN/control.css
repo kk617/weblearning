@@ -76,13 +76,25 @@ main .aside > figure{
     background-size: cover;
     border-radius: 50%;
     border: #fff 0.5px solid;
-    animation: rotate infinite linear;
-    animation-duration: 30s;
+    /* animation: rotate infinite linear 30s; */
+    animation-play-state: paused;
+    animation-fill-mode: backwards;
     box-shadow:  1px 1px 3px #ccc;
 }
+main .aside > figure.play{
+    animation: rotate infinite linear 30s;
+}
 
+main .aside > figure.restart{
+    animation: rotatereset infinite linear 30s;
+}
 
 @keyframes rotate{
+    from{
+        transform: rotate(-360deg)
+    }
+}
+@keyframes rotatereset{
     from{
         transform: rotate(-360deg)
     }
@@ -136,9 +148,43 @@ main .icons .fas{
 }
 
 main .area-bar{
-    margin-top: 10vh;
+    margin-top: 5vh;
     display: flex;
     align-items: center;
+    cursor: pointer;
+}
+main .vol{
+    margin-top: 5vh;
+    display: flex;
+    align-items: center;
+    font-size: 3vh;
+}
+main .vol .fas{
+    margin-right: 2vh
+}
+main .vol .volumebar{
+    display: none;
+}
+main .vol .volDisplay{
+    display: inline-block;
+}
+
+
+main .vol input[type=range]{ 
+    outline: none; 
+    -webkit-appearance: none;/*清除系统默认样式*/  
+    width:12vh;  
+    background: #ddd;    
+    height: 0.5vh;/*横条的高度*/  
+} 
+/*拖动块的样式*/  
+main .vol input[type=range]::-webkit-slider-thumb {  
+    -webkit-appearance: none;/*清除系统默认样式*/  
+    height:1vh;/*拖动块高度*/  
+    width: 1vh;/*拖动块宽度*/  
+    background: #fff;/*拖动块背景*/  
+    border-radius: 50%; /*外观设置为圆形*/  
+    border: solid 1vh #FC354C; /*设置边框*/  
 }
 
 main .area-bar .bar{
@@ -146,19 +192,20 @@ main .area-bar .bar{
     flex: 1;
     height: .8vh;
     border-radius: .2vh;
-    background: rgba(255,255,255,0.4)
+    background: rgba(255,255,255,0.4);
+    width: 100%;
 }
 
 main .area-bar .current-time{
     width: 3vh;
     font-size: 2vh;
     margin-left: 1vh;
+    margin-right: 1vh;
 }
 
-main .area-bar .current-time{
+main .area-bar .total-time{
     width: 3vh;
     font-size: 2vh;
-    margin-left: 1vh;
 }
 
 main .area-bar .bar-progress{
@@ -167,6 +214,8 @@ main .area-bar .bar-progress{
     width: 10%;
     background-color: #fff;
     border-radius: .2vh;
+    transition: width .8s;
+    cursor: pointer;
 }
 main .author{
     font-size: 3vh;
@@ -255,4 +304,8 @@ footer .fa-chevron-left{
 }
 footer .fa-chevron-right{
     right: -8vh;
+}
+.boomText {
+  display: inline-block;
+  opacity: 0;
 }

@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="referrer" content="never">
     <title>My music player</title>
     <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="control.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
 </head>
 <body>
     <section id='page-music'>
         <main class="layout">
             <div class="aside">
-                <figure></figure>
+                <figure class="play"></figure>
                 <div class="actions">
                    <i class="fas fa-thumbs-up"></i>
-                   <i class="fas fa-step-backward"></i>
-                   <i class="fas fa-play"></i>
+                   <i class="play-btn fas fa-play"></i>
                     <!-- <i class="fas fa-pause"> -->
                    <i class="fas fa-step-forward"></i>
                 </div>
@@ -40,15 +41,22 @@
                         <span>1123</span>
                     </li>
                 </ul>
+                <div class="vol">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" min = '0' max="1" name="vol" step = '0.01' id="volcontrol" class="volumebar">
+                </div>
                 <div class="area-bar">
                     <div class="bar">
                         <div class="bar-progress"></div>
+                        <div class="playbar2"></div>
                     </div>
                     <div class="current-time">1:02</div>
+                    <div> / </div>
+                    <div class="total-time">1:02</div>
                 </div>
-                <div class="author">周杰伦</div>
+                <div class="author"></div>
                 <div class="lyric">
-                    <p>hello world</p>
+                    <p></p>
                 </div>
             </div>
         </main>
