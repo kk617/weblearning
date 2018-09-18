@@ -39,7 +39,8 @@
 ```
 4. 通过监控play 来更新各项数据如进度条，时间等，一个小问题：找了半天jQuery没有onplay，不知道对不对，一个小改进：利用setInterval 匀速输出时间 监听play
 5. 监听进度条拖拽+函数节流达到指定时间点播放的功能
-6. 控制音量：利用toggleClass 实现音量调节bar的显示与不显示，通过
+6. 监听播放时间与总时间的关系，自动播放下一曲
+7. 控制音量：利用toggleClass 实现音量调节bar的显示与不显示，通过
 ```
 _this.$container.find('.vol .volumebar').on('change',function(){
            var vol = (this.value)
@@ -47,4 +48,29 @@ _this.$container.find('.vol .volumebar').on('change',function(){
        })
 ```
 实现播放器的音量调节
-
+8. 通过引入animate.css + 编写一个组件 实现了歌词的特效播放
+```
+ _this.$container.find('.lyric p').text(currentLyric).boomText()
+ $.fn.boomText = function(type){
+    type = type || 'rollIn'
+    console.log(type)
+    this.html(function(){
+      var arr = $(this).text()
+      .split('').map(function(word){
+          return '<span class="boomText">'+ word + '</span>'//为了将每个字一个个显示
+      })
+      return arr.join('')
+    })
+    
+    var index = 0
+    var $boomTexts = $(this).find('span')
+    var clock = setInterval(function(){
+      $boomTexts.eq(index).addClass('animated ' + type)
+      index++
+      if(index >= $boomTexts.length){
+        clearInterval(clock)
+      }
+    }, 300)
+  }
+ ```
+ 
