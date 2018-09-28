@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>原生jQuery实现TAB切换</title>
+  <style>
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+ul,li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.tabct{
+    width: 310px;
+    margin: 30px auto;
+}
+.pannels{
+  width: 600px;
+}
+.clearfix::after {
+  content: " ";
+  clear: both;
+  display: block;
+  overflow: hidden;
+  }
+
+.pannels .tab{
+  float: left;
+  padding: 10px;
+  background-color: #ddd;
+  border-left: 0.5px solid #ccc;
+  border-top: 0.5px solid #ccc;
+}
+.pannels .tab:last-child{
+    border-right: 0.5px solid #ccc;
+}
+ .pannels .tab.active{
+  background-color: white;
+}
+.displayarea{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:300px;
+  height: 188px;
+  border: 0.5px solid black;
+  background-color: white;
+}
+.displayarea .content{
+  display: none;
+}
+.displayarea .content.active{
+  display: block;
+}
+  </style>
+      <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+</head>
+<body>
+      <div class="tabct clearfix">
+        <ul class="pannels clearfix">
+            <li  class="tab">tab1</li>
+            <li  class="tab">tab2</li>
+            <li class="tab">tab3</li>
+            <li class="tab">tab4</li>
+          </ul>    
+        <ul class="displayarea">
+            <li class="content"><a href="#"><img src="./p1.jpg" alt=""></a></li>
+            <li class="content"><a href="#"><img src="./p2.jpg" alt=""></a></li>
+            <li class="content"><a href="#"><img src="./p3.jpg" alt=""></a></li>
+            <li class="content"><a href="#"><img src="./p4.jpg" alt=""></a></li>
+        </ul>
+        </div>
+        <div class="tabct clearfix">
+        <ul class="pannels clearfix">
+            <ul class="pannels clearfix">
+                <li  class="tab">tab1</li>
+                <li  class="tab">tab2</li>
+                <li class="tab">tab3</li>
+                <li class="tab">tab4</li>
+            </ul>    
+            <ul class="displayarea">
+                <li class="content"><a href="#"><img src="./p1.jpg" alt=""></a></li>
+                <li class="content"><a href="#"><img src="./p2.jpg" alt=""></a></li>
+                <li class="content"><a href="#"><img src="./p3.jpg" alt=""></a></li>
+                <li class="content"><a href="#"><img src="./p4.jpg" alt=""></a></li>
+            </ul>
+            </div>
+  <script>
+    function Tab ($ct){
+    //补全
+    this.init($ct);
+    this.bind()
+}
+  
+  Tab.prototype = {
+      constructor: Tab,
+      init: function($ct){
+        this.$ct = $ct;
+        this.$pannels = this.$ct.find('.pannels li')
+        this.$displayarea =  this.$ct.find('.displayarea li');
+        this.index = 0;
+        this.bind();
+      },
+      bind: function(){
+       var _this = this;
+       this.$pannels.on('click',function(){
+            console.log($(this))
+           console.log($(this).index())
+           _this.index = $(this).index();
+           _this.$pannels.eq(_this.index).addClass('active').siblings().removeClass('active')
+           _this.$displayarea.eq(_this.index).addClass('active').siblings().removeClass('active')
+       })
+  }       
+  }      
+
+var tab1 = new Tab($('.tabct').eq(0));
+var tab2 = new Tab($('.tabct').eq(1));
+
+  </script>
+
+</body>
+</html>

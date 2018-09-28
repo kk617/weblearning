@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Carousel Component</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <style>
+        .carousel{
+            position: relative;
+            width: 300px;
+            height: 188px;
+            margin: 30px auto;
+            overflow: hidden;
+        }
+        .carousel ul,
+        .carousel li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .carousel .img-ctn{
+            position: absolute;
+        }
+        .carousel .img-ctn>li{
+            float: left;
+        }
+        .carousel .img-ctn img{
+            width: 300px;
+            height: 188px;
+        }
+        .carousel .arrow{
+            position: absolute;
+            top:50%;
+            margin-top: -15px;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            line-height: 30px;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+        }
+        .carousel .arrow:hover{
+            opacity: 0.8;
+        }
+        .carousel .back{
+            left: 10px
+        }
+        .carousel .next{
+            right: 10px;
+        }
+        .carousel .bullet{
+            position: absolute;
+            z-index: 1;
+            bottom: 10px;
+            width: 100%;
+            font-size: 0;
+            text-align: center;        
+        }
+        .carousel .bullet > li{
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin: 0 3px;
+            cursor: pointer;
+        }
+        .carousel .bullet > li.active{
+            background: #fff;
+        }
+        .clearfix::after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="carousel clearfix">
+        <ul class="img-ctn ">
+            <!-- <li data-id=5><a href="#"><img src="./p6.jpg"></a></li> -->
+            <li data-id=0><a href="#"><img src="./p1.jpg"></a></li>
+            <li data-id=1><a href="#"><img src="./p2.jpg"></a></li>
+            <li data-id=2><a href="#"><img src="./p3.jpg"></a></li>
+            <li data-id=3><a href="#"><img src="./p4.jpg"></a></li>
+            <li data-id=4><a href="#"><img src="./p5.jpg"></a></li>
+            <li data-id=5><a href="#"><img src="./p6.jpg"></a></li>
+            <!-- <li data-id=0><a href="#"><img src="./p1.jpg"></a></li> -->
+        </ul>
+    <a href="#" class="arrow back"><</a>
+    <a href="#" class="arrow next">></a>
+    <ul class="bullet">
+        <li class = 'active'></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    </div>
+    <div class="carousel clearfix">
+            <ul class="img-ctn ">
+                <!-- <li data-id=5><a href="#"><img src="./p6.jpg"></a></li> -->
+                <li data-id=0><a href="#"><img src="./p1.jpg"></a></li>
+                <li data-id=1><a href="#"><img src="./p2.jpg"></a></li>
+                <li data-id=2><a href="#"><img src="./p3.jpg"></a></li>
+                <li data-id=3><a href="#"><img src="./p4.jpg"></a></li>
+                <li data-id=4><a href="#"><img src="./p5.jpg"></a></li>
+                <li data-id=5><a href="#"><img src="./p6.jpg"></a></li>
+                <!-- <li data-id=0><a href="#"><img src="./p1.jpg"></a></li> -->
+            </ul>
+        <a href="#" class="arrow back"><</a>
+        <a href="#" class="arrow next">></a>
+        <ul class="bullet">
+            <li class = 'active'></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        </div>
+    <script>
+        function Carousel($ct){
+            this.init($ct);
+            this.bind();
+        }
+        Carousel.prototype={
+            init: function($ct){
+                this.$ct = $ct;
+                this.$imgctn = this.$ct.find('.img-ctn')
+                this.$imgs = this.$ct.find('.img-ctn >li')
+                this.$preBtn = this.$ct.find('.back')
+                this.$nextBtn = this.$ct.find('.next')
+                this.$bullets = this.$ct.find('.bullet li')
+                this.$imgWidth = this.$imgs.width()
+                this.$imgCnt = this.$imgs.length
+                this.index = 0
+                this.isAnimatie = false;
+                // 形成最终DOM
+                this.$imgctn.append(this.$imgs.first().clone())
+                this.$imgctn.prepend(this.$imgs.last().clone())
+                //撑开宽度
+                this.$imgctn.width((this.$imgCnt+2) * this.$imgWidth)
+                //初始话偏移
+                this.$imgctn.css('left',-this.$imgWidth);
+            },
+            bind: function(){
+                var _this = this 
+                this.$preBtn.on('click',this.playPre.bind(this,1));
+                this.$nextBtn.on('click',this.playNext.bind(this,1));
+                this.$bullets.on('click',function(){
+                    console.log($(this).index())
+                    console.log(_this.index)
+                    var pointIndex = $(this).index()
+                    if(_this.index > pointIndex){
+                        _this.playPre(_this.index - pointIndex)
+                    }else{
+                        _this.playNext(pointIndex - _this.index);
+                    }    
+                });
+            },
+            playNext: function(times){
+                var _this = this;
+                console.log(this.isAnimatie)
+                if(this.isAnimatie) return
+                this.isAnimatie = true;
+                this.$imgctn.animate({
+                    left: '-=' + this.$imgWidth * times + 'px'
+                },500,'linear',function(){
+                    _this.index += times;
+                    _this.setBullet()
+                    _this.isAnimatie = false;
+                   if(_this.index >= _this.$imgCnt){
+                       _this.$imgctn.css('left',-_this.$imgWidth);
+                       _this.index = 0;
+                   }
+                })
+
+            },
+            playPre: function(times){
+                var _this = this;
+                if(this.isAnimatie) return
+                this.isAnimatie = true;
+                this.$imgctn.animate({//动画所以是+=
+                    left: "+=" + _this.$imgWidth * times+ 'px' 
+                },500,"linear",function(){
+                    _this.index -= times;
+                    _this.setBullet();
+                    _this.isAnimatie = false;
+                    if(_this.index <0){
+                        _this.$imgctn.css('left', -_this.$imgWidth*_this.$imgCnt)//直接设定不是动画
+                        _this.index = _this.$imgCnt-1;
+                    }
+                })
+            },
+            playBullet: function(){
+                var _this = this;
+                console.log(_this.$bullets)
+                
+            },
+            setBullet: function(){
+                console.log(this.index)
+                // console.log(this.$bullets.eq(this.index))
+                this.$bullets.eq(this.index%this.$imgCnt).addClass('active').siblings().removeClass('active')
+            },
+            autoPlay: function(){
+                var _this = this;
+                this.clock = setInterval(function(){
+                    _this.playNext(1)
+                },500)
+            },
+            stopAuto: function(){
+                clearInterval(this.clock)
+            }
+        }
+        var a = new Carousel($('.carousel').eq(0))
+        var b = new Carousel($('.carousel').eq(1))
+    </script>
+</body>
+</html>
